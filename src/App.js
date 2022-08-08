@@ -1,8 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Layout from "./components/ui/Layout";
+import CapacityPage from "./pages/CapacityPage";
 
 function App() {
-  return <div className="App">CPL Capacity Tracker</div>;
+  return (
+    <Layout>
+      <CapacityPage />
+    </Layout>
+  );
 }
 
 export default App;
