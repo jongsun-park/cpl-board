@@ -8,6 +8,7 @@ import {
 import { StyledInput, TimeSelect } from "../ui/Input";
 import { Container, InnerContainer } from "../ui/Container";
 import { Button } from "../ui/Button";
+import styled, { keyframes } from "styled-components";
 
 const QueueControl = () => {
   // const initialState = { qname: "", qstart: "", qend: "", qamount: 0 };
@@ -60,15 +61,16 @@ const AgentsControl = () => {
         <p className="msg">No agents are selected to work on the queue.</p>
       ) : (
         capacity.map(({ id, aname, astart, aend, anum, ahtarget }) => (
-          <InnerContainer key={id}>
+          <AgentsInnerContainer key={id}>
             <StyledInput
-              label="Gorup name"
+              label="Group Name"
               name="aname"
               value={aname}
               onChange={changeAgents.bind(this, id)}
+              tooltipText="TO/CSE, FR/DE, KR, SC"
             />
             <StyledInput
-              label="How many agents?"
+              label="Number of Agents"
               name="anum"
               value={anum}
               onChange={changeAgents.bind(this, id)}
@@ -80,6 +82,8 @@ const AgentsControl = () => {
               value={ahtarget}
               onChange={changeAgents.bind(this, id)}
               type="number"
+              max="30"
+              tooltipText="TO/CSE:25, FR/DE:27.5, KR:16, SC:20"
             />
             <TimeSelect
               label="Start Shift"
@@ -94,10 +98,14 @@ const AgentsControl = () => {
               onChange={changeAgents.bind(this, id)}
             />
 
-            <Button onClick={removeAgents.bind(this, id)} outline>
+            <Button
+              onClick={removeAgents.bind(this, id)}
+              styles={{ marginBottom: "3em" }}
+              outline
+            >
               Remove
             </Button>
-          </InnerContainer>
+          </AgentsInnerContainer>
         ))
       )}
       <Button onClick={addAgents} primary>
@@ -117,3 +125,20 @@ const Controls = () => {
 };
 
 export default Controls;
+
+const appearContainer = keyframes`
+0% {
+  opacity: 0;
+  transform: translateY(10px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0px);
+}
+`;
+const AgentsInnerContainer = styled(InnerContainer)`
+  animation: ${appearContainer} 200ms ease-in forwards;
+  .hidden: {
+    display: none;
+  }
+`;

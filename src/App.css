@@ -66,3 +66,19 @@ h1, h2, h3{
 ::selection{
   background-color: #43BCB3;
 }
+
+/* Page loading */
+@keyframes fadein{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+
+.loading{
+  position: relative;
+  animation: fadein 2s ease-out forwards;
+}
